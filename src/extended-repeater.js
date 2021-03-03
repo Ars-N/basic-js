@@ -1,13 +1,16 @@
 const CustomError = require("../extensions/custom-error");
 module.exports=(str, options)=>{
   let {repeatTimes,separator,addition,additionRepeatTimes,additionSeparator}=options
+  if (typeof str=== 'object'){str=str+''}
+  if (typeof addition=== 'object'){addition=addition+''}
   str!==null?str=str.toString():str='null'
   if (addition===undefined){addition=''}
   if (repeatTimes===undefined){repeatTimes=1}
   if (additionRepeatTimes===undefined){additionRepeatTimes=1}
   addition!==null?addition=addition.toString():0
   separator===undefined?separator='+':0
-  additionSeparator ===undefined?additionSeparator ='+':0
+  additionSeparator ===undefined?additionSeparator ='|':0
+
   let arr=[],
       recurs=(i)=>{
         if (i>0){
@@ -33,8 +36,4 @@ module.exports=(str, options)=>{
   recurs2(repeatTimes)
   return arr.length>1?arr.reduce((a,b)=>a.concat(b)):arr.toString()
 }
-
-
-
-
 
